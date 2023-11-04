@@ -69,7 +69,7 @@ public class RobotContainer {
       new ArmPIDCommand(arm, "coneMid"),
       new ClawCMD(claw),
       new WaitCommand(1.5),
-      new MoveAtSpeedForTime(swerveSubsystem, 10, 0, 0, 100)
+      new MoveAtSpeedForTime(swerveSubsystem, 10, 0, 0, 2)
     );
   }
 }
