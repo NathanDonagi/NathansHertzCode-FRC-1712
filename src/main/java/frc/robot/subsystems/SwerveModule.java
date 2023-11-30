@@ -4,6 +4,7 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 
+import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -70,18 +71,21 @@ public class SwerveModule {
         return turnEncoder.getVelocity();
     }
     public double getAbsoluteEncoderAngle(){
-        return absoluteEncoder.getBusVoltage() / RobotController.getVoltage5V() * 2.0 * Math.PI;
+        return absoluteEncoder.getAbsolutePosition();
     }
     public double getAbsoluteEncoderRadians(){
-        return absoluteEncoder.getAbsolutePosition() / 360;
+        return absoluteEncoder.getAbsolutePosition() * Math.PI / 180;
     }
     public double getTurnMotorOutput(){
         return turnMotor.getOutputCurrent();
     }
+    public SwerveModulePosition getModulePosition(){
+        return new SwerveModulePosition(getDrivePosition(), new Rotation2d(getTurnPosition()));
+    }
 
     public void resetEncoders(){
         driveEncoder.setPosition(0);
-        turnEncoder.setPosition(0);//getAbsoluteEncoderRadians());
+        turnEncoder.setPosition(0);
     }
 
     public void setPercentSpeed(double speed){
