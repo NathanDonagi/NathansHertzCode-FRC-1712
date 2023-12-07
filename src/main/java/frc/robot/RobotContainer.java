@@ -70,9 +70,9 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     return new SequentialCommandGroup(
       new WaitCommand(1.5),
-      new MoveToPosition(swerveSubsystem, new Pose2d(new Translation2d(1.5, 0), new Rotation2d(0))),
-      new MoveToPosition(swerveSubsystem, new Pose2d(new Translation2d(1.5, -0.7), new Rotation2d(0))),
-      new MoveToPosition(swerveSubsystem, new Pose2d(new Translation2d(0, 0), new Rotation2d(0)))
+      new MoveToPosition(swerveSubsystem, new Pose2d(new Translation2d(-1.5, 0), new Rotation2d(1)))
+      // new MoveToPosition(swerveSubsystem, new Pose2d(new Translation2d(0, -0.4), new Rotation2d(1))),
+      // new MoveToPosition(swerveSubsystem, new Pose2d(new Translation2d(0, 0), new Rotation2d(0)))
     );
   }
 }

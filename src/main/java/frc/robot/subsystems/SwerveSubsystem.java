@@ -85,10 +85,7 @@ public SwerveSubsystem(){
         gyro.reset();
     }
     public double getHeading(){
-        return Math.IEEEremainder(gyro.getAngle(), 360);
-    }
-    public Rotation2d getRotation2d(){
-        return Rotation2d.fromDegrees(getHeading());
+        return Math.IEEEremainder(-gyro.getAngle(), 360);
     }
 
     public Pose2d getPose(){
@@ -96,23 +93,29 @@ public SwerveSubsystem(){
     }
 
     public Rotation2d getRobotRotation2d(){
-        return Rotation2d.fromDegrees(-gyro.getAngle());
+        return Rotation2d.fromDegrees(getHeading());
     }
 
     public void periodic(){
         swerveDriveOdometry.update(getRobotRotation2d(), getModulePositions());
         SmartDashboard.putNumber("robot x", getPose().getX());
         SmartDashboard.putNumber("robot y", getPose().getY());
+
         // SmartDashboard.putNumber("Front Left Target Rotation", FLTarget);
         // SmartDashboard.putNumber("Front Right Target Rotation", FRTarget);
         // SmartDashboard.putNumber("Back Left Target Rotation", BLTarget);
         // SmartDashboard.putNumber("Back Right Target Rotation", BRTarget);
 
-        // SmartDashboard.putNumber("Robot Heading", getHeading());
-        // SmartDashboard.putNumber("Front Left Rotation", frontLeft.getTurnPosition());
-        // SmartDashboard.putNumber("Front Right Rotation", frontRight.getTurnPosition());
-        // SmartDashboard.putNumber("Back Left Rotation", backLeft.getTurnPosition());
-        // SmartDashboard.putNumber("Back Right Rotation", backRight.getTurnPosition());
+        SmartDashboard.putNumber("Robot Heading", getHeading());
+        SmartDashboard.putNumber("Front Left Rotation", frontLeft.getTurnPosition());
+        SmartDashboard.putNumber("Front Right Rotation", frontRight.getTurnPosition());
+        SmartDashboard.putNumber("Back Left Rotation", backLeft.getTurnPosition());
+        SmartDashboard.putNumber("Back Right Rotation", backRight.getTurnPosition());
+
+        SmartDashboard.putNumber("Front Left Abs Encoder", frontLeft.getAbsoluteEncoderAngle());
+        SmartDashboard.putNumber("Front Right Abs Encoder", frontRight.getAbsoluteEncoderAngle());
+        SmartDashboard.putNumber("Back Left Abs Encoder", backLeft.getAbsoluteEncoderAngle());
+        SmartDashboard.putNumber("Back Right Abs Encoder", backRight.getAbsoluteEncoderAngle());
 
         // SmartDashboard.putNumber("Front Left Turn Output", frontLeft.getTurnMotorOutput());
         // SmartDashboard.putNumber("Front Right Turn Output", frontRight.getTurnMotorOutput());
